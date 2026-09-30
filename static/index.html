@@ -174,11 +174,12 @@
           </div>
 
           <div class="field-wrap">
-            <label for="loan_percent_income">Loan to Income Ratio <span class="req">*</span></label>
-            <div class="input-wrap">
-              <input type="number" id="loan_percent_income" name="loan_percent_income" placeholder="e.g. 0.40" min="0" max="1" step="0.01" required />
+            <label>Loan to Income Ratio</label>
+            <div class="auto-calc-display" id="lpiDisplay">
+              <span class="auto-icon">⚡</span>
+              <span id="lpiValue">Auto-calculated</span>
             </div>
-            <span class="hint">Loan amount ÷ Annual income (0–1)</span>
+            <span class="hint">Automatically computed: Loan Amount ÷ Annual Income</span>
           </div>
 
         </div>

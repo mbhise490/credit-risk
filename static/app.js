@@ -9,6 +9,26 @@ const resultSection = document.getElementById('resultSection');
 const resultCard    = document.getElementById('resultCard');
 const toast      = document.getElementById('toast');
 
+// ---- Live Loan-to-Income Ratio Calculation ----
+function calcLoanPercentIncome() {
+  const income  = parseFloat(document.getElementById('person_income').value);
+  const loanAmt = parseFloat(document.getElementById('loan_amnt').value);
+  const display = document.getElementById('lpiDisplay');
+  const valEl   = document.getElementById('lpiValue');
+
+  if (income > 0 && loanAmt >= 0) {
+    const ratio = loanAmt / income;
+    valEl.textContent = ratio.toFixed(4) + `  (${(ratio * 100).toFixed(1)}%)`;
+    display.classList.add('has-value');
+  } else {
+    valEl.textContent = 'Auto-calculated';
+    display.classList.remove('has-value');
+  }
+}
+
+document.getElementById('person_income').addEventListener('input', calcLoanPercentIncome);
+document.getElementById('loan_amnt').addEventListener('input', calcLoanPercentIncome);
+
 // ---- Toast Notification ----
 function showToast(message, type = 'info', duration = 3500) {
   toast.textContent = message;
@@ -35,6 +55,9 @@ function validateForm() {
 clearBtn.addEventListener('click', () => {
   form.reset();
   form.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+  // Reset auto-calc display
+  document.getElementById('lpiValue').textContent = 'Auto-calculated';
+  document.getElementById('lpiDisplay').classList.remove('has-value');
   resultSection.style.display = 'none';
   showToast('Form cleared.', 'info', 2000);
 });
@@ -114,17 +137,20 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
-  // Gather data
+  // Gather data — loan_percent_income is auto-calculated
+  const incomeVal  = parseFloat(document.getElementById('person_income').value);
+  const loanAmtVal = parseFloat(document.getElementById('loan_amnt').value);
+
   const formData = {
     person_age               : parseInt(document.getElementById('person_age').value),
-    person_income            : parseFloat(document.getElementById('person_income').value),
+    person_income            : incomeVal,
     person_home_ownership    : document.getElementById('person_home_ownership').value,
     person_emp_length        : parseFloat(document.getElementById('person_emp_length').value),
     loan_intent              : document.getElementById('loan_intent').value,
     loan_grade               : document.getElementById('loan_grade').value,
-    loan_amnt                : parseFloat(document.getElementById('loan_amnt').value),
+    loan_amnt                : loanAmtVal,
     loan_int_rate            : parseFloat(document.getElementById('loan_int_rate').value),
-    loan_percent_income      : parseFloat(document.getElementById('loan_percent_income').value),
+    loan_percent_income      : parseFloat((loanAmtVal / incomeVal).toFixed(4)),
     cb_person_default_on_file: document.getElementById('cb_person_default_on_file').value,
     cb_person_cred_hist_length: parseInt(document.getElementById('cb_person_cred_hist_length').value),
   };

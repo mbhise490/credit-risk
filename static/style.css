@@ -296,6 +296,27 @@ select option { background: #1e2435; color: var(--text); }
 
 .hint { font-size: 0.75rem; color: var(--text-muted); }
 
+/* Auto-calculated field display */
+.auto-calc-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(99,102,241,0.08);
+  border: 1.5px dashed rgba(99,102,241,0.4);
+  border-radius: 8px;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+  min-height: 40px;
+  transition: background 0.2s, color 0.2s;
+}
+.auto-calc-display.has-value {
+  background: rgba(99,102,241,0.15);
+  border-style: solid;
+}
+.auto-icon { font-size: 0.85rem; }
+
 /* ================================================
    FORM ACTIONS
    ================================================ */

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Credit Risk Predictor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        CreditGuard AI
+      </div>
+      <nav class="nav-links">
+        <a href="#predict-section">Predict</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">AI-Powered Assessment</span>
+      <h1>Credit Risk <span class="gradient-text">Predictor</span></h1>
+      <p>Instantly evaluate loan default probability using our advanced machine learning model. Fill in the applicant details below to get a comprehensive risk assessment.</p>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">99%</span><span class="stat-label">Accuracy</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">11</span><span class="stat-label">Features Analyzed</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">&lt;1s</span><span class="stat-label">Response Time</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="visual-card">
+        <div class="vc-header">Risk Score</div>
+        <div class="vc-gauge">
+          <svg viewBox="0 0 120 70" class="gauge-svg">
+            <path d="M10 65 A50 50 0 0 1 110 65" stroke="#e2e8f0" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M10 65 A50 50 0 0 1 110 65" stroke="url(#gaugeGrad)" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="80" id="gaugeArc"/>
+            <defs>
+              <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#22c55e"/>
+                <stop offset="50%" style="stop-color:#f59e0b"/>
+                <stop offset="100%" style="stop-color:#ef4444"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="gauge-value">--</div>
+        </div>
+        <div class="vc-labels"><span>Low</span><span>Medium</span><span>High</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM SECTION -->
+  <section class="predict-section" id="predict-section">
+    <div class="section-header">
+      <h2>Loan Application Details</h2>
+      <p>Enter the applicant's information to assess credit risk</p>
+    </div>
+
+    <form id="loanForm" novalidate>
+
+      <!-- Personal Info -->
+      <div class="form-group-card">
+        <div class="card-title">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Personal Information
+        </div>
+        <div class="form-grid">
+
+          <div class="field-wrap">
+            <label for="person_age">Age <span class="req">*</span></label>
+            <div class="input-wrap">
+              <input type="number" id="person_age" name="person_age" placeholder="e.g. 28" min="18" max="100" required />
+              <span class="unit">yrs</span>
+            </div>
+            <span class="hint">Applicant's current age (18–100)</span>
+          </div>
+
+          <div class="field-wrap">
+            <label for="person_income">Annual Income <span class="req">*</span></label>
+            <div class="input-wrap">
+              <span class="prefix">₹</span>
+              <input type="number" id="person_income" name="person_income" placeholder="e.g. 500000" min="0" required />
+            </div>
+            <span class="hint">Gross annual income</span>
+          </div>
+
+          <div class="field-wrap">
+            <label for="person_home_ownership">Home Ownership <span class="req">*</span></label>
+            <select id="person_home_ownership" name="person_home_ownership" required>
+              <option value="" disabled selected>Select ownership</option>
+              <option value="RENT">Rent</option>
+              <option value="OWN">Own</option>
+              <option value="MORTGAGE">Mortgage</option>
+              <option value="OTHER">Other</option>
+            </select>
+            <span class="hint">Current housing situation</span>
+          </div>
+
+          <div class="field-wrap">
+            <label for="person_emp_length">Employment Length <span class="req">*</span></label>
+            <div class="input-wrap">
+              <input type="number" id="person_emp_length" name="person_emp_length" placeholder="e.g. 3.5" min="0" max="60" step="0.5" required />
+              <span class="unit">yrs</span>
+            </div>
+            <span class="hint">Years at current job</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Loan Info -->
+      <div class="form-group-card">
+        <div class="card-title">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Loan Details
+        </div>
+        <div class="form-grid">
+
+          <div class="field-wrap">
+            <label for="loan_intent">Loan Intent <span class="req">*</span></label>
+            <select id="loan_intent" name="loan_intent" required>
+              <option value="" disabled selected>Select purpose</option>
+              <option value="PERSONAL">Personal</option>
+              <option value="EDUCATION">Education</option>
+              <option value="MEDICAL">Medical</option>
+              <option value="VENTURE">Venture / Business</option>
+              <option value="HOMEIMPROVEMENT">Home Improvement</option>
+              <option value="DEBTCONSOLIDATION">Debt Consolidation</option>
+            </select>
+            <span class="hint">Purpose of the loan</span>
+          </div>
+
+          <div class="field-wrap">
+            <label for="loan_grade">Loan Grade <span class="req">*</span></label>
+            <select id="loan_grade" name="loan_grade" required>
+              <option value="" disabled selected>Select grade</option>
+              <option value="A">A — Excellent</option>
+              <option value="B">B — Good</option>
+              <option value="C">C — Fair</option>
+              <option value="D">D — Poor</option>
+              <option value="E">E — Very Poor</option>
+              <option value="F">F — Bad</option>
+              <option value="G">G — Very Bad</option>
+            </select>
+            <span class="hint">Credit grading of the loan</span>
+          </div>
+
+          <div class="field-wrap">
+            <label for="loan_amnt">Loan Amount <span class="req">*</span></label>
+            <div class="input-wrap">
+              <span class="prefix">₹</span>
+              <input type="number" id="loan_amnt" name="loan_amnt" placeholder="e.g. 200000" min="0" required />
+            </div>
+            <span class="hint">Total amount requested</span>
+          </div>
+
+          <div class="field-wrap">
+            <label for="loan_int_rate">Interest Rate <span class="req">*</span></label>
+            <div class="input-wrap">
+              <input type="number" id="loan_int_rate" name="loan_int_rate" placeholder="e.g. 12.5" min="0" max="100" step="0.1" required />
+              <span class="unit">%</span>
+            </div>
+            <span class="hint">Annual interest rate</span>
+          </div>
+
+          <div class="field-wrap">
+            <label for="loan_percent_income">Loan to Income Ratio <span class="req">*</span></label>
+            <div class="input-wrap">
+              <input type="number" id="loan_percent_income" name="loan_percent_income" placeholder="e.g. 0.40" min="0" max="1" step="0.01" required />
+            </div>
+            <span class="hint">Loan amount ÷ Annual income (0–1)</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Credit History -->
+      <div class="form-group-card">
+        <div class="card-title">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Credit History
+        </div>
+        <div class="form-grid">
+
+          <div class="field-wrap">
+            <label for="cb_person_default_on_file">Prior Default on File <span class="req">*</span></label>
+            <select id="cb_person_default_on_file" name="cb_person_default_on_file" required>
+              <option value="" disabled selected>Select option</option>
+              <option value="Y">Yes — has defaulted before</option>
+              <option value="N">No — no prior default</option>
+            </select>
+            <span class="hint">Historical default record</span>
+          </div>
+
+          <div class="field-wrap">
+            <label for="cb_person_cred_hist_length">Credit History Length <span class="req">*</span></label>
+            <div class="input-wrap">
+              <input type="number" id="cb_person_cred_hist_length" name="cb_person_cred_hist_length" placeholder="e.g. 5" min="0" max="50" required />
+              <span class="unit">yrs</span>
+            </div>
+            <span class="hint">Length of credit history in years</span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="clearBtn" class="btn-secondary">Clear Form</button>
+        <button type="submit" id="submitBtn" class="btn-primary">
+          <span class="btn-text">Analyze Risk</span>
+          <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+
+    </form>
+  </section>
+
+  <!-- RESULT SECTION -->
+  <section class="result-section" id="resultSection" style="display:none;">
+    <div class="result-card" id="resultCard">
+      <div class="result-header">
+        <div class="result-icon" id="resultIcon"></div>
+        <div>
+          <h3 id="resultTitle">Assessment Result</h3>
+          <p id="resultSubtitle"></p>
+        </div>
+      </div>
+      <div class="result-grid">
+        <div class="result-metric">
+          <span class="metric-label">Default Probability</span>
+          <span class="metric-value" id="resProbability">--</span>
+        </div>
+        <div class="result-metric">
+          <span class="metric-label">Risk Level</span>
+          <span class="metric-value" id="resResult">--</span>
+        </div>
+        <div class="result-metric">
+          <span class="metric-label">Model Threshold</span>
+          <span class="metric-value" id="resThreshold">--</span>
+        </div>
+        <div class="result-metric">
+          <span class="metric-label">Prediction</span>
+          <span class="metric-value" id="resPrediction">--</span>
+        </div>
+      </div>
+      <div class="prob-bar-wrap">
+        <div class="prob-bar-labels"><span>0%</span><span>Risk Probability</span><span>100%</span></div>
+        <div class="prob-bar-bg">
+          <div class="prob-bar-fill" id="probBarFill"></div>
+          <div class="prob-bar-threshold" id="probBarThreshold"></div>
+        </div>
+      </div>
+      <div class="result-actions">
+        <button class="btn-secondary" onclick="document.getElementById('loanForm').scrollIntoView({behavior:'smooth'})">New Assessment</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section" id="how-it-works">
+    <div class="section-header">
+      <h2>How It Works</h2>
+      <p>Our 3-step process for fast and accurate credit risk evaluation</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Enter Applicant Details</h3>
+        <p>Fill in the loan applicant's personal information, loan specifics, and credit history into the form.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>ML Model Analysis</h3>
+        <p>Our trained model processes 11 key features using gradient boosting to compute default probability.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Get Risk Assessment</h3>
+        <p>Receive an instant verdict — <strong>Low Risk</strong> or <strong>High Risk</strong> — with probability score and threshold.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="about-content">
+      <h2>About This Model</h2>
+      <p>CreditGuard AI is powered by a machine learning model trained on real-world lending data. It predicts whether a loan applicant is likely to default based on 11 carefully selected features — spanning personal demographics, loan characteristics, and credit bureau history.</p>
+      <p>The model uses an optimized probability threshold (stored in <code>best_threshold.pkl</code>) to balance precision and recall, making it suitable for real-world lending decisions.</p>
+      <div class="tech-pills">
+        <span>FastAPI</span><span>scikit-learn</span><span>Pandas</span><span>Joblib</span><span>Python 3.10+</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>CreditGuard AI &copy; 2026 &mdash; Built with FastAPI &amp; Machine Learning</p>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
